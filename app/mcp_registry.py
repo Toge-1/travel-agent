@@ -1,9 +1,10 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 from typing import Any
 from dataclasses import dataclass
 import asyncio
 import json
+import os
 
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
@@ -28,7 +29,8 @@ class MCPToolRegistry:
         self._lock = asyncio.Lock()
 
     async def startup(self) -> None:
-        params = StdioServerParameters(command=self.command, args=self.args)
+        # Ensure MCP subprocess inherits current environment variables.
+        params = StdioServerParameters(command=self.command, args=self.args, env=dict(os.environ))
         self._client_cm = stdio_client(params)
         read, write = await self._client_cm.__aenter__()
         self._session = ClientSession(read, write)
