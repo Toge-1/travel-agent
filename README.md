@@ -26,6 +26,12 @@ pip install -r requirements.txt
 - `OPENAI_API_KEY`
 - `AMAP_API_KEY`
 
+`OPENAI_BASE_URL` 和 `OPENAI_MODEL` 已在代码中默认设置为：
+- `https://dashscope.aliyuncs.com/compatible-mode/v1`
+- `qwen-plus`
+
+如果需要覆盖，仍可在 `.env` 中显式设置。
+
 ## 运行
 ```bash
 cd C:\Users\34781\travel-agent

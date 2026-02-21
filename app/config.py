@@ -1,4 +1,4 @@
-from functools import lru_cache
+﻿from functools import lru_cache
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -6,8 +6,8 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
     openai_api_key: str
-    openai_base_url: str | None = None
-    openai_model: str = "gpt-4o-mini"
+    openai_base_url: str | None = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+    openai_model: str = "qwen-plus"
 
     amap_api_key: str
 
