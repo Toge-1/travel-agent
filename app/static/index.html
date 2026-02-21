@@ -1,0 +1,117 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel Agent Planner</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-orb orb-3"></div>
+
+    <main class="shell">
+      <header class="hero">
+        <p class="eyebrow">LangGraph Travel Planner</p>
+        <h1>把行程做成一张「可执行的计划卡」</h1>
+        <p class="sub">
+          输入城市、天数、偏好，一键生成分天行程、酒店、景点与路线摘要。数据来自高德与大模型。
+        </p>
+      </header>
+
+      <section class="grid">
+        <form id="plan-form" class="card">
+          <h2>行程参数</h2>
+          <div class="field-group">
+            <label>出发城市</label>
+            <input name="origin_city" list="city-list" value="上海" required />
+          </div>
+          <div class="field-group">
+            <label>目的城市</label>
+            <input name="destination_city" list="city-list" value="杭州" required />
+          </div>
+          <datalist id="city-list">
+            <option value="北京"></option>
+            <option value="上海"></option>
+            <option value="广州"></option>
+            <option value="深圳"></option>
+            <option value="杭州"></option>
+            <option value="成都"></option>
+            <option value="重庆"></option>
+            <option value="西安"></option>
+            <option value="武汉"></option>
+            <option value="南京"></option>
+          </datalist>
+          <div class="field-group">
+            <label>开始日期</label>
+            <input name="start_date" type="date" value="2026-03-05" required />
+          </div>
+          <div class="field-row">
+            <div class="field-group">
+              <label>天数</label>
+              <input name="days" type="number" min="1" max="30" value="1" required />
+            </div>
+            <div class="field-group">
+              <label>人数</label>
+              <input name="travelers" type="number" min="1" max="20" value="2" required />
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-group">
+              <label>预算档</label>
+              <select name="budget_level">
+                <option value="budget">预算型</option>
+                <option value="moderate" selected>适中</option>
+                <option value="premium">高端</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label>酒店档</label>
+              <select name="hotel_level">
+                <option value="budget">预算型</option>
+                <option value="comfort" selected>舒适</option>
+                <option value="premium">高端</option>
+              </select>
+            </div>
+          </div>
+          <div class="field-group">
+            <label>偏好标签（逗号分隔）</label>
+            <input name="preferences" value="博物馆, 美食" />
+          </div>
+          <div class="field-group">
+            <label>节奏</label>
+            <select name="pace">
+              <option value="relaxed">轻松</option>
+              <option value="balanced" selected>均衡</option>
+              <option value="fast">紧凑</option>
+            </select>
+          </div>
+          <button type="submit" class="primary">生成行程</button>
+          <p class="hint">请求会调用外部接口，预计 30-90 秒。</p>
+        </form>
+
+        <section class="card output">
+          <div class="output-header">
+            <h2>规划结果</h2>
+            <div class="status" id="status">等待请求</div>
+          </div>
+          <div id="result" class="result empty">
+            <p>点击「生成行程」后，结果会显示在这里。</p>
+          </div>
+        </section>
+      </section>
+
+      <section class="card tips">
+        <h3>快速提示</h3>
+        <ul>
+          <li>天数越多，生成时间越久。</li>
+          <li>如果超时，降低天数或提高后端超时时间。</li>
+          <li>酒店/景点为空时，说明外部接口未返回结果。</li>
+        </ul>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
