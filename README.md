@@ -34,7 +34,6 @@ pip install -r requirements.txt
 
 ## 运行
 ```bash
-cd C:\Users\34781\travel-agent
 .\.venv\Scripts\python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
